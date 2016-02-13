@@ -3,9 +3,33 @@
 <html>
   <head>
     <title>Photorganizer!</title>
-    <link type="text/css" rel="stylesheet" href="{% static 'css/photo.css'}">
+    <link type="text/css" rel="stylesheet" href="{% static "css/photo.css"}">
   </head>
   <body>
-    <h3 background=#FF00000 > Hello World! soy sofi </h3>
+    <h3 style="color:blue;"> Hello World! soy sofi, yeeyy </h3>
+
+    <h1> Welcome to Photorganizer! </h1>
+
+    <form action="/path_manager/" method="get">
+
+        <h3> Ingrese la url de la carpeta que desea organizar! </h3>
+
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+        <input type="text" name="ruta">
+
+        <input type="submit" value="Organizar!" />
+
+    </form>
+
+    <h4> Usado recientemente: </h4>
+    <ul>
+    {% for c in carpetas %}
+        <li><a href="/manejador_rutas?ruta={{ c.ruta }}""> {{ c.ruta }}  </a>
+            <a href="/eliminar/{{ c.id }}/origen">   Eliminar </a></li>
+    {% endfor %}
+    </ul>
+
+
   </body>
 </html>
