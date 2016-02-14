@@ -1,13 +1,6 @@
-{% load staticfiles %}
+{% extends 'photo/basephoto.html' %}
 
-<html>
-  <head>
-    <title>Photorganizer!</title>
-    <link type="text/css" rel="stylesheet" href="{% static "css/photo.css"}">
-  </head>
-  <body>
-    <h3 style="color:blue;"> Hello World! soy sofi, yeeyy </h3>
-
+{% block content %}
     <h1> Welcome to Photorganizer! </h1>
 
     <form action="/path_manager/" method="get">
@@ -30,6 +23,4 @@
     {% endfor %}
     </ul>
 
-
-  </body>
-</html>
+{% endblock content %}
