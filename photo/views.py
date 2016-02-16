@@ -18,8 +18,8 @@ def home(request):
     return render(
         request,
         'photo/photohome.html',
-        {'carpetas': Folder.objects.filter(tipo='origen').order_by('ruta')},
-        {'form': form},
+        {'carpetas': Folder.objects.filter(tipo='origen').order_by('ruta'),
+        'form': form}
     )
 
 def path_manager(request):

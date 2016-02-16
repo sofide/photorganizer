@@ -11,11 +11,15 @@
     </form>
 
     <h4> Usado recientemente: </h4>
-    {% if carpetas.lenght= 0 }
-    <ul>
+
     {% for c in carpetas %}
-        <li> {{ c.ruta }} </li>
+
+      <ul>
+
+          <li> {{ c.ruta }} </li>
+
+      </ul>
+
     {% endfor %}
-    </ul>
 
 {% endblock content %}
