@@ -1,6 +1,11 @@
 {% extends 'photo/basephoto.html' %}
 
 {% block content %}
+
+    <h3> {{ carpeta }} </h3>
+
+    <img src="file:///{{ fotos.0 }}" />
+
     {% for foto in fotos %}
       <p> {{ foto }}</p>
     {% endfor %}
