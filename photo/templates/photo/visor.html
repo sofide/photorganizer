@@ -1,0 +1,8 @@
+{% extends 'photo/basephoto.html' %}
+
+{% block content %}
+    {% for foto in fotos %}
+      <p> {{ foto }}</p>
+    {% endfor %}
+
+{% endblock content %}

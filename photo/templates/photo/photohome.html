@@ -4,22 +4,31 @@
     <h1> Welcome to Photorganizer! </h1>
     <h3> Ingrese la url de la carpeta que desea organizar! </h3>
 
-    <form method="post">{% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Save</button>
+    <p class="error"> {{ error }} </p>
 
-    </form>
+    {% if form %}
 
-    <h4> Usado recientemente: </h4>
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
 
-    {% for c in carpetas %}
+      </form>
+    {% endif %}
 
-      <ul>
+    {% if carpetas %}
 
-          <li> {{ c.ruta }} </li>
+      <h4> Usado recientemente: </h4>
 
-      </ul>
+      {% for c in carpetas %}
 
-    {% endfor %}
+        <ul>
+
+            <li> {{ c.ruta }} </li>
+
+        </ul>
+
+      {% endfor %}
+
+    {% endif %}
 
 {% endblock content %}

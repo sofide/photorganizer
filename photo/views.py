@@ -1,6 +1,23 @@
-from django.shortcuts import render
+import glob
+from django.shortcuts import render, redirect
 from photo.models import Folder
 from .forms import OrigenFolder
+
+def visor(request, ruta):
+    photosList = glob.glob(ruta + '*.jpg')
+
+    if photosList == []:
+        return render(
+        request,
+        'photo/photohome.html',
+        {'error': "No hay fotos en esa carpeta!"}
+        )
+    else:
+        return(
+        request,
+        'visor.html',
+        {'fotos': photosList}
+        )
 
 
 def home(request):
@@ -10,8 +27,17 @@ def home(request):
 
         if form.is_valid():
             folder = form.save(commit=False)
+
+            if folder.ruta[-1] != '/':
+                folder.ruta = folder.ruta + '/'
+
             folder.tipo = 'origen'
+
             folder.save()
+
+            return redirect('photos.views.visor', ruta=folder.ruta)
+
+
     else:
         form = OrigenFolder()
 
@@ -21,7 +47,3 @@ def home(request):
         {'carpetas': Folder.objects.filter(tipo='origen').order_by('ruta'),
         'form': form}
     )
-
-def path_manager(request):
-    return render(request,
-        'photo/prueba.html')
