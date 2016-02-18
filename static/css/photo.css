@@ -1,4 +1,19 @@
 h3 {
   color: red;
   background: blue;
+  font-family: Verdana;
+
+}
+
+h1 {
+  background: yellow;
+}
+
+.error {
+  background: pink;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
