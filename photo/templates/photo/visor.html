@@ -4,22 +4,28 @@
 
     <h3> {{ carpeta }} </h3>
 
-    <h3> Ingrese la ruta a donde desea mover la imagen </h3>
+    <p class="error"> {{ error }} </p>
 
-    <form method="post">{% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Save</button>
+    {% if form %}
 
-    </form>
+      <h3> Ingrese la ruta a donde desea mover la imagen </h3>
 
-    <img src="{{ fotos.0 }}" />
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
 
-    <h3> Ultimas carpetas de destino: </h3>
-        {{ carpetas }}
+      </form>
 
-    <h3> Fotos dentro de esta carpeta: </h3>
-    {% for foto in fotos %}
-      <p> {{ foto }}</p>
-    {% endfor %}
+      <img src="{{ fotos.0 }}" />
+
+      <h3> Ultimas carpetas de destino: </h3>
+          {{ carpetas }}
+
+      <h3> Fotos dentro de esta carpeta: </h3>
+      {% for foto in fotos %}
+        <p> {{ foto }}</p>
+      {% endfor %}
+
+    {% endif %}
 
 {% endblock content %}
