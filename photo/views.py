@@ -67,6 +67,11 @@ def visor(request, pk):
             shutil.move(photosList[0], folder.ruta)
 
             photosList = glob.glob(carpetaActual.ruta + '*.jpg')
+            photosList.append(glob.glob(carpetaActual.ruta + '*JPG'))
+            photosList.append(glob.glob(carpetaActual.ruta + '*png'))
+            photosList.append(glob.glob(carpetaActual.ruta + '*PNG'))
+            photosList.append(glob.glob(carpetaActual.ruta + '*jpeg'))
+            photosList.append(glob.glob(carpetaActual.ruta + '*JPEG'))
 
     else:
         form = FormFolder()
