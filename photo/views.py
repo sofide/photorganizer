@@ -34,7 +34,16 @@ def home(request):
 def visor(request, pk):
     carpetaActual = get_object_or_404(Folder, pk=pk)
 
-    photosList = glob.glob(carpetaActual.ruta + '*.jpg')
+    def listarFotos(ruta):
+        photosList = glob.glob(ruta + '*.jpg')
+        for i in glob.glob(ruta + '*.JPG'): photosList.append(i)
+        for i in glob.glob(ruta + '*.png'): photosList.append(i)
+        for i in glob.glob(ruta + '*.PNG'): photosList.append(i)
+        for i in glob.glob(ruta + '*.jpeg'): photosList.append(i)
+        for i in glob.glob(ruta + '*.JPEG'): photosList.append(i)
+        return photosList
+
+    photosList = listarFotos(carpetaActual.ruta)
 
     if request.method == "POST":
         form = FormFolder(request.POST)
@@ -66,12 +75,7 @@ def visor(request, pk):
 
             shutil.move(photosList[0], folder.ruta)
 
-            photosList = glob.glob(carpetaActual.ruta + '*.jpg')
-            photosList.append(glob.glob(carpetaActual.ruta + '*JPG'))
-            photosList.append(glob.glob(carpetaActual.ruta + '*png'))
-            photosList.append(glob.glob(carpetaActual.ruta + '*PNG'))
-            photosList.append(glob.glob(carpetaActual.ruta + '*jpeg'))
-            photosList.append(glob.glob(carpetaActual.ruta + '*JPEG'))
+            photosList = listarFotos(carpetaActual.ruta)
 
     else:
         form = FormFolder()
