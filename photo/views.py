@@ -21,7 +21,7 @@ def home(request):
                 folder.save()
 
             #eliminar elif cuando borre rutas duplicadas de la bd
-            elif Folder.objects.filter(ruta = folder.ruta).count > 1:
+            elif len(Folder.objects.filter(ruta = folder.ruta)) > 1:
                 return redirect('photo.views.visor',
                 pk = Folder.objets.filter(ruta = folder.ruta)[0].id)
 
