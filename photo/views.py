@@ -11,14 +11,23 @@ def home(request):
         if form.is_valid():
             folder = form.save(commit=False)
 
-            if folder.ruta[-1] != '/':
-                folder.ruta = folder.ruta + '/'
+            if Folder.objects.filter(ruta = folder.ruta) == []:
 
-            folder.tipo = 'origen'
+                if folder.ruta[-1] != '/':
+                    folder.ruta = folder.ruta + '/'
 
-            folder.save()
+                folder.tipo = 'origen'
 
-            return redirect('photo.views.visor', pk=folder.id)
+                folder.save()
+
+            #eliminar elif cuando borre rutas duplicadas de la bd
+            elif Folder.objects.filter(ruta = folder.ruta).count > 1:
+                return redirect('photo.views.visor',
+                pk = Folder.objets.filter(ruta = folder.ruta)[0].id)
+
+            else:
+                folder = Folder.objects.get(ruta = folder.ruta)
+                return redirect('photo.views.visor', pk=folder.id)
 
 
     else:
