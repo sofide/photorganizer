@@ -8,9 +8,26 @@ body {
   padding: 1%;
 }
 
-img {
-  max-width: 50%;
-  height: auto;
+a {
+  color: black;
+}
+
+a:hover {
+  color: white;
+  background-color: black;
+  text-decoration: none;
+}
+
+button {
+  padding: 10px 20px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  border: none;
+
+}
+button:hover {
+  background-color: gray;
 }
 
 .page-header {
@@ -31,7 +48,7 @@ img {
 }
 
 .page-header a:hover {
-  color: #279c34;
+  color: #D8D8D8;
 }
 
 .principal {
@@ -53,4 +70,43 @@ img {
   float: right;
   text-align: left;
 
+}
+
+#visor {
+  float: right;
+  max-width: 50%;
+  height: auto;
+}
+
+#destino {
+  float: left;
+}
+
+#galeria {
+  clear: right;
+  float:left;
+  margin: 10px;
+  padding: 10px;
+  background-color: #545454;
+}
+
+#galeria img {
+  margin: 5px;
+  border-radius: 8px;
+  display: inline-block;
+  height: 100px;
+  width: auto;
+}
+
+#eliminar {
+position:inherit;
+  font-size: 10px;
+  color: #626562;
+  text-decoration: none;
+}
+
+.error {
+  padding: 10px;
+  background-color: #FFC0CB;
+  color: #FF7373;
 }

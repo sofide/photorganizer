@@ -15,7 +15,7 @@
       {% endif %}
     </div>
 
-    <div class="carpetas">
+    <div clas="carpetas">
       {% if carpetas %}
 
         <h4> Usado recientemente: </h4>
@@ -24,7 +24,11 @@
 
           <ul>
 
-              <li> <a href="/visor/{{ c.id }}/"> {{ c.ruta }} </a> </li>
+              <li>
+                <a href="/visor/{{ c.id }}/"> {{ c.ruta }} </a>
+                <a href="/eliminar/{{ c.id }}/" id="eliminar"> eliminar </a>
+
+              </li>
 
           </ul>
 

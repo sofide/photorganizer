@@ -2,30 +2,44 @@
 
 {% block content %}
 
-    <h3 class="principal" > Estas por organizar la carpeta {{ carpeta }} </h3>
+    <h3 class="principal" > Estás organizando la carpeta {{ carpeta }} </h3>
 
-    <p class="error"> {{ error }} </p>
+    {% if error %}
+      <p class="error"> {{ error }} </p>
+    {% endif %}
 
     {% if form %}
+      <div class="formulario">
+        <h3> Ingrese la ruta a donde desea mover la imágen </h3>
+        <form method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Save</button>
+        </form>
+      </div>
 
-      <h3> Ingrese la ruta a donde desea mover la imagen </h3>
+      <img id="visor" src="/li/{{ fotos.0 }}" />
 
-      <form method="post" class="formulario">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
+      <div class="carpetas" id="destino">
+        <h3> Últimas carpetas de destino: </h3>
+        <ul>
+          {% for c in carpetas %}
+            <li>
+              <a href="/mover/{{carpeta.id}}/{{c.id}}">{{ c }}</a>
+              <a id="eliminar" href="/eliminar/{{ c.id }}"> eliminar </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
 
-      </form>
+      <div id="galeria">
+        <h3> Fotos dentro de esta carpeta: </h3>
+        {% for foto in fotos %}
+          <img src="/li/{{ foto }}"/>
+        {% endfor %}
+      </div>
 
-      <img src="{{ fotos.0 }}" />
+      {% endif %}
 
-      <h3> Ultimas carpetas de destino: </h3>
-          {{ carpetas }}
 
-      <h3> Fotos dentro de esta carpeta: </h3>
-      {% for foto in fotos %}
-        <p> {{ foto }}</p>
-      {% endfor %}
-
-    {% endif %}
 
 {% endblock content %}
