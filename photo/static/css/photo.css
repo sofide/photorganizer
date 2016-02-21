@@ -72,10 +72,12 @@ button:hover {
 
 #destino {
   float: left;
+  clear: left;
 }
 
 #origen {
   float: right;
+  clear: right;
 }
 
 #visor {
