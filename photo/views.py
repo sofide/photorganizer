@@ -74,13 +74,22 @@ def visor(request, pk):
         form = FormFolder()
 
     if photosList == []:
-        return render(
-        request,
-        'photo/visor.html',
-        {'error': "No hay fotos en esa carpeta!",
-        'carpeta': carpetaActual,
-        }
-        )
+        if os.path.exists(carpetaActual.ruta):
+            return render(
+            request,
+            'photo/visor.html',
+            {'error': "No hay fotos en la carpeta especificada! [verificar que no haya espacios en la ruta]",
+            'carpeta': carpetaActual,
+            }
+            )
+        else:
+            return render(
+            request,
+            'photo/visor.html',
+            {'error': "La carpeta especificada no existe",
+            'carpeta': carpetaActual,
+            }
+            )
 
     else:
         return render(

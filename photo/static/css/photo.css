@@ -59,7 +59,7 @@ button:hover {
 
 .formulario {
   background: white;
-  border: 5px solid #707c6f;
+  border: 2px solid #2d2d2d;
   padding: 10px;
   width: 45%;
   float: left;
@@ -67,9 +67,15 @@ button:hover {
 
 .carpetas {
   width: 45%;
-  float: right;
   text-align: left;
+}
 
+#destino {
+  float: left;
+}
+
+#origen {
+  float: right;
 }
 
 #visor {
@@ -78,15 +84,10 @@ button:hover {
   height: auto;
 }
 
-#destino {
-  float: left;
-}
-
 #galeria {
   clear: right;
   float:left;
   margin: 10px;
-  padding: 10px;
   background-color: #545454;
 }
 
@@ -96,6 +97,14 @@ button:hover {
   display: inline-block;
   height: 100px;
   width: auto;
+}
+
+#galeria h3 {
+  background-color: #2d2d2d;
+  color: white;
+  padding: 10px;
+  width: auto;
+  margin:0px;
 }
 
 #eliminar {
