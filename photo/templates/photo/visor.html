@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h3> {{ carpeta }} </h3>
+    <h3 class="principal" > Estas por organizar la carpeta {{ carpeta }} </h3>
 
     <p class="error"> {{ error }} </p>
 
@@ -10,7 +10,7 @@
 
       <h3> Ingrese la ruta a donde desea mover la imagen </h3>
 
-      <form method="post">{% csrf_token %}
+      <form method="post" class="formulario">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
 

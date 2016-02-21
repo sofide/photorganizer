@@ -1,32 +1,35 @@
 {% extends 'photo/basephoto.html' %}
 
 {% block content %}
-    <h1> Welcome to Photorganizer! </h1>
-    <h3> Ingrese la url de la carpeta que desea organizar! </h3>
+    <h1 class="principal"> Welcome to Photorganizer! </h1>
 
-    {% if form %}
+    <div class="formulario">
+      {% if form %}
+        <h3> Ingrese la ruta de la carpeta que desea organizar: </h3>
 
-      <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
+        <form method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Save</button>
 
-      </form>
-    {% endif %}
+        </form>
+      {% endif %}
+    </div>
 
-    {% if carpetas %}
+    <div class="carpetas">
+      {% if carpetas %}
 
-      <h4> Usado recientemente: </h4>
+        <h4> Usado recientemente: </h4>
 
-      {% for c in carpetas %}
+        {% for c in carpetas %}
 
-        <ul>
+          <ul>
 
-            <li> <a href="/visor/{{ c.id }}/"> {{ c.ruta }} </a> </li>
+              <li> <a href="/visor/{{ c.id }}/"> {{ c.ruta }} </a> </li>
 
-        </ul>
+          </ul>
 
-      {% endfor %}
+        {% endfor %}
 
-    {% endif %}
-
+      {% endif %}
+    </div>
 {% endblock content %}
