@@ -14,21 +14,16 @@ def home(request):
             if folder.ruta[-1] != '/':
                 folder.ruta = folder.ruta + '/'
 
-            if Folder.objects.filter(ruta = folder.ruta) == []:
+            if Folder.objects.filter(ruta = folder.ruta, tipo = 'origen').exists():
 
+                folder = Folder.objects.get(ruta = folder.ruta, tipo = 'origen')
+
+            else:
                 folder.tipo = 'origen'
 
                 folder.save()
 
-            #eliminar elif cuando borre rutas duplicadas de la bd
-            elif len(Folder.objects.filter(ruta = folder.ruta)) > 1:
-                return redirect('photo.views.visor',
-                pk = Folder.objects.filter(ruta = folder.ruta)[0].id)
-
-            else:
-                folder = Folder.objects.get(ruta = folder.ruta)
-                return redirect('photo.views.visor', pk=folder.id)
-
+            return redirect('photo.views.visor', pk=folder.id)
 
     else:
         form = FormFolder()
@@ -63,24 +58,26 @@ def visor(request, pk):
             if folder.ruta[-1] != '/':
                 folder.ruta = folder.ruta + '/'
 
-            if not os.path.exists(folder.ruta):
-                try:
-                    os.makedirs(folder.ruta)
-                except:
-                    return render(
-                        request,
-                        'photo/visor.html',
-                        {'carpetas': Folder.objects.filter(tipo='destino').order_by('ruta'),
-                        'form': form,
-                        'fotos': photosList,
-                        'carpeta': carpetaActual,
-                        'error': "No se puede crear la carpeta espcificada"
-                        }
-                    )
+            if Folder.objects.filter(ruta = folder.ruta, tipo = 'destino').exists():
+                folder = Folder.objects.get(ruta = folder.ruta, tipo = 'destino')
 
-            folder.tipo = 'destino'
-
-            folder.save()
+            else:
+                if not os.path.exists(folder.ruta):
+                    try:
+                        os.makedirs(folder.ruta)
+                    except:
+                        return render(
+                            request,
+                            'photo/visor.html',
+                            {'carpetas': Folder.objects.filter(tipo='destino').order_by('ruta'),
+                            'form': form,
+                            'fotos': photosList,
+                            'carpeta': carpetaActual,
+                            'error': "No se puede crear la carpeta espcificada"
+                            }
+                        )
+                folder.tipo = 'destino'
+                folder.save()
 
             shutil.move(photosList[0], folder.ruta)
 
