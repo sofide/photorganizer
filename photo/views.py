@@ -12,7 +12,7 @@ def home(request):
         if form.is_valid():
             folder = form.save(commit=False)
 
-            folder. ruta = acondicionar_ruta(folder.ruta)
+            folder.ruta = acondicionar_ruta(folder.ruta)
 
             if Folder.objects.filter(ruta=folder.ruta, tipo='origen').exists():
 
@@ -32,7 +32,7 @@ def home(request):
         request,
         'photo/photohome.html',
         {'carpetas': Folder.objects.filter(tipo='origen').order_by('ruta'),
-        'form': form}
+         'form': form}
     )
 
 def visor(request, pk):
@@ -73,22 +73,23 @@ def visor(request, pk):
     else:
         form = FormFolder()
 
-    if photosList == []:
+    # es igual a if photoList == []:
+    if not photosList:
         if os.path.exists(carpetaActual.ruta):
             return render(
-            request,
-            'photo/visor.html',
-            {'error': "No hay fotos en la carpeta especificada! [verificar que no haya espacios en la ruta]",
-            'carpeta': carpetaActual,
-            }
+                request,
+                'photo/visor.html',
+                {'error': "No hay fotos en la carpeta especificada! [verificar que no haya espacios en la ruta]",
+                 'carpeta': carpetaActual,
+                }
             )
         else:
             return render(
-            request,
-            'photo/visor.html',
-            {'error': "La carpeta especificada no existe",
-            'carpeta': carpetaActual,
-            }
+                request,
+                'photo/visor.html',
+                {'error': "La carpeta especificada no existe",
+                 'carpeta': carpetaActual,
+                }
             )
 
     else:
@@ -96,9 +97,9 @@ def visor(request, pk):
             request,
             'photo/visor.html',
             {'carpetas': Folder.objects.filter(tipo='destino').order_by('ruta'),
-            'form': form,
-            'fotos': photosList,
-            'carpeta': carpetaActual,
+             'form': form,
+             'fotos': photosList,
+             'carpeta': carpetaActual,
             }
         )
 
@@ -116,10 +117,10 @@ def mover(request, origen, destino):
             request,
             'photo/visor.html',
             {'carpetas': Folder.objects.filter(tipo='destino').order_by('ruta'),
-            'form': FormFolder(),
-            'fotos': photosList,
-            'carpeta': origen,
-            'error': "No se puede crear la carpeta espcificada"
+             'form': FormFolder(),
+             'fotos': photosList,
+             'carpeta': origen,
+             'error': "No se puede crear la carpeta espcificada"
             }
         )
     shutil.move(photosList[0], destino.ruta)

@@ -1,12 +1,10 @@
 import glob, os
 
 def listarFotos(ruta):
-    photosList = glob.glob(ruta + '*.jpg')
-    for i in glob.glob(ruta + '*.JPG'): photosList.append(i)
-    for i in glob.glob(ruta + '*.png'): photosList.append(i)
-    for i in glob.glob(ruta + '*.PNG'): photosList.append(i)
-    for i in glob.glob(ruta + '*.jpeg'): photosList.append(i)
-    for i in glob.glob(ruta + '*.JPEG'): photosList.append(i)
+    photosList = [file_name
+                  for file_name in glob.glob(ruta + '*.*')
+                  if file_name.lower().endswith(('jpg', 'jpeg', 'png'))]
+    photosList = list(sorted(photosList))[0:30]
     return photosList
 
 def acondicionar_ruta(ruta):
