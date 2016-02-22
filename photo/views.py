@@ -103,10 +103,14 @@ def visor(request, pk):
             }
         )
 
-def eliminar(request, pk):
+def eliminar(request, pk, volver, carpeta_actual=None):
     folder = get_object_or_404(Folder, pk=pk)
     folder.delete()
-    return redirect('photo.views.home')
+    if volver == 'v':
+        return redirect('photo.views.visor', pk=carpeta_actual)
+    else:
+        return redirect('photo.views.home')
+
 
 def mover(request, origen, destino):
     origen = get_object_or_404(Folder, pk=origen)

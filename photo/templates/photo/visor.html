@@ -25,7 +25,7 @@
           {% for c in carpetas %}
             <li>
               <a href="/mover/{{carpeta.id}}/{{c.id}}">{{ c }}</a>
-              <a id="eliminar" href="/eliminar/{{ c.id }}"> eliminar </a>
+              <a id="eliminar" href="/eliminar/{{ c.id }}/v/{{carpeta.id}}"> eliminar </a>
             </li>
           {% endfor %}
         </ul>
