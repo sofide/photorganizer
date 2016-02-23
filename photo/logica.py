@@ -6,13 +6,18 @@ def listarFotos(carpeta):
                   for file_name in glob.glob(carpeta.ruta + '*.*')
                   if file_name.lower().endswith(('jpg', 'jpeg', 'png'))]
     photosList = list(sorted(photosList))
-    no_mostrar = ImagenRechazada.objects.filter(carpeta=carpeta)
+    rechazadas = ImagenRechazada.objects.filter(carpeta=carpeta)
+    no_mostrar =[]
+    for foto in rechazadas:
+        no_mostrar.append(foto.ruta)
+
+    mostrar = []
 
     for foto in photosList:
-        if foto in no_mostrar:
-            photosList.remove(foto)
+        if foto not in no_mostrar:
+            mostrar.append(foto)
 
-    return photosList[0:30]
+    return mostrar[0:30]
 
 
 def acondicionar_ruta(ruta):

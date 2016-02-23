@@ -8,6 +8,7 @@
       <p class="error"> {{ error }} </p>
     {% endif %}
 
+  <div id="panel_izquierdo">
     {% if form %}
       <div class="formulario">
         <h3> Ingrese la ruta a donde desea mover la imágen </h3>
@@ -17,9 +18,7 @@
         </form>
       </div>
 
-      <div class="button"><a href="/rechazar/{{ carpeta.id }}">No quiero mover esta imagen</a></div>
-
-      <img id="visor" src="/li/{{ fotos.0 }}" />
+      <a class="button" href="/rechazar/{{ carpeta.id }}">No quiero mover esta imagen</a>
 
       <div class="carpetas" id="destino">
         <h3> Últimas carpetas de destino: </h3>
@@ -32,6 +31,9 @@
           {% endfor %}
         </ul>
       </div>
+  </div>
+
+      <img id="visor" src="/li/{{ fotos.0 }}" />
 
       <div id="galeria">
         <h3> Otras imágenes dentro de esta carpeta: </h3>
