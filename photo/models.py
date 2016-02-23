@@ -6,3 +6,10 @@ class Folder(models.Model):
 
     def __str__(self):
             return self.ruta
+
+class ImagenRechazada(models.Model):
+    carpeta = models.ForeignKey(Folder)
+    ruta = models.CharField(max_length=250)
+
+    def __str__(self):
+            return self.ruta

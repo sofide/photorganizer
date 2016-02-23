@@ -1,6 +1,6 @@
 import glob, shutil, os
 from django.shortcuts import render, redirect, get_object_or_404
-from photo.models import Folder
+from photo.models import Folder, ImagenRechazada
 from .forms import FormFolder
 from photo.logica import listarFotos, acondicionar_ruta, comprobar_carpeta
 
@@ -38,7 +38,7 @@ def home(request):
 def visor(request, pk):
     carpetaActual = get_object_or_404(Folder, pk=pk)
 
-    photosList = listarFotos(carpetaActual.ruta)
+    photosList = listarFotos(carpetaActual)
 
     if request.method == "POST":
         form = FormFolder(request.POST)
@@ -68,7 +68,7 @@ def visor(request, pk):
 
             shutil.move(photosList[0], folder.ruta)
 
-            photosList = listarFotos(carpetaActual.ruta)
+            photosList = listarFotos(carpetaActual)
 
     else:
         form = FormFolder()
@@ -115,7 +115,7 @@ def eliminar(request, pk, volver, carpeta_actual=None):
 def mover(request, origen, destino):
     origen = get_object_or_404(Folder, pk=origen)
     destino = get_object_or_404(Folder, pk=destino)
-    photosList = listarFotos(origen.ruta)
+    photosList = listarFotos(origen)
     if comprobar_carpeta(destino.ruta) == "error":
         return render(
             request,
@@ -129,3 +129,12 @@ def mover(request, origen, destino):
         )
     shutil.move(photosList[0], destino.ruta)
     return redirect('photo.views.visor', pk=origen.id)
+
+
+def rechazar(request, carpeta):
+    carpeta = get_object_or_404(Folder, pk=carpeta)
+    foto = listarFotos(carpeta)[0]
+    foto_rechazada = ImagenRechazada(carpeta=carpeta, ruta=foto)
+    foto_rechazada.save()
+
+    return redirect('photo.views.visor', pk=carpeta.id)
