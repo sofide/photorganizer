@@ -145,3 +145,11 @@ position:inherit;
   float: left;
   clear: left;
 }
+
+#ocultas img {
+  margin: 5px;
+  border-radius: 8px;
+  display: inline-block;
+  height: 200px;
+  width: auto;
+}

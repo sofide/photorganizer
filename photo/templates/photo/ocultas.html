@@ -1,0 +1,17 @@
+{% extends 'photo/basephoto.html' %}
+
+{% block content %}
+
+  <h3 class="principal" > Fotos ocultas de la carpeta {{ carpeta }} </h3>
+
+
+  <div id="ocultas">
+    <h3> Clickea las imagenes que quieras restaurar para poder moverlas de la carpeta {{ carpeta }}</h3>
+    {% for foto in imagenes %}
+      <img src="/li/{{ foto }}"/>
+    {% endfor %}
+  </div>
+
+
+
+{% endblock content %}

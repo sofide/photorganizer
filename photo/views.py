@@ -138,3 +138,15 @@ def rechazar(request, carpeta):
     foto_rechazada.save()
 
     return redirect('photo.views.visor', pk=carpeta.id)
+
+def ocultas(request, carpeta):
+    carpeta = get_object_or_404(Folder, pk=carpeta)
+    imagenes_ocultas = ImagenRechazada.objects.filter(carpeta=carpeta)
+
+    return render (
+        request,
+        'photo/ocultas.html',
+        {'carpeta': carpeta,
+         'imagenes': imagenes_ocultas
+        }
+    )
