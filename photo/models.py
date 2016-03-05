@@ -10,6 +10,7 @@ class Folder(models.Model):
 class ImagenRechazada(models.Model):
     carpeta = models.ForeignKey(Folder)
     ruta = models.CharField(max_length=250)
+    ocultar = models.BooleanField(default=True)
 
     def __str__(self):
             return self.ruta
