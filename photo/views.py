@@ -150,3 +150,21 @@ def ocultas(request, carpeta):
          'imagenes': imagenes_ocultas
         }
     )
+
+def restaurar(request, carpeta, pk):
+    imagen = get_object_or_404(ImagenRechazada, pk=pk)
+
+    if imagen.ocultar == True:
+        imagen.ocultar = False
+    else:
+        imagen.ocultar = True
+    imagen.save()
+
+    return redirect('photo.views.ocultas', carpeta=carpeta)
+
+def desocultar(request, carpeta):
+    imagenes_desocultar = ImagenRechazada.objects.filter(ocultar=False)
+    for image in imagenes_desocultar:
+        image.delete()
+
+    return redirect('photo.views.visor', pk=carpeta)

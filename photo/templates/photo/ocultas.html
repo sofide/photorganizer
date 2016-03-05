@@ -4,12 +4,24 @@
 
   <h3 class="principal" > Fotos ocultas de la carpeta {{ carpeta }} </h3>
 
-
-  <div id="ocultas">
     <p> Estas imágenes se han ocultado de la carpeta {{ carpeta }} porque dijiste que no querías moverlas de ahí</p>
     <h3> Clickea las imagenes que quieras restaurar para poder moverlas de la carpeta {{ carpeta }}</h3>
+
+    <a class="button" href="/desocultar/{{carpeta.id}}">
+      Restaurar imagenes seleccionadas
+    </a>
+  <div id="ocultas">
     {% for foto in imagenes %}
-      <img src="/li/{{ foto }}"/>
+      {% if foto.ocultar == True %}
+        <a href="/restaurar/{{carpeta.id}}/{{foto.id}}">
+          <img id="ocultar" src="/li/{{ foto }}"/>
+        </a>
+      {% else %}
+        <a href="/restaurar/{{carpeta.id}}/{{foto.id}}">
+          <img id="restaurar" src="/li/{{ foto }}"/>
+        </a>
+      {% endif %}
+
     {% endfor %}
   </div>
 

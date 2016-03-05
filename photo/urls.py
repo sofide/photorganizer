@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^mover/(?P<origen>[0-9]+)/(?P<destino>[0-9]+)/$', views.mover, name='mover'),
     url(r'^rechazar/(?P<carpeta>[0-9]+)/$', views.rechazar, name='rechazar'),
     url(r'^ocultas/(?P<carpeta>[0-9]+)/$', views.ocultas, name='ocultas'),
+    url(r'^restaurar/(?P<carpeta>[0-9]+)/(?P<pk>[0-9]+)/$', views.restaurar, name='restaurar'),
+    url(r'^desocultar/(?P<carpeta>[0-9]+)/$', views.desocultar, name='desocultar'),
     url(r'^li/(?P<path>.*)$', serve, {'document_root': '/'}),
 ]
