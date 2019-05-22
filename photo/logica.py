@@ -4,7 +4,7 @@ from photo.models import ImagenRechazada
 def listarFotos(carpeta):
     photosList = [file_name
                   for file_name in glob.glob(carpeta.ruta + '*.*')
-                  if file_name.lower().endswith(('jpg', 'jpeg', 'png'))]
+                  if file_name.lower().endswith(('jpg', 'jpeg', 'png', 'bmp', 'gif'))]
     photosList = list(sorted(photosList))
     rechazadas = ImagenRechazada.objects.filter(carpeta=carpeta)
     no_mostrar =[]
